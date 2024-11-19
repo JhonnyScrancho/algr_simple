@@ -554,7 +554,18 @@ class ChatInterface:
             chat_state = st.session_state.chat_state
             
             # Prepara contesto esteso
-            files = chat_state.files if hasattr(chat_state, 'files') else None
+            files = None
+            if hasattr(chat_state, 'files') and chat_state.files:
+                # Assicurati che i file siano nel formato corretto
+                files = [{
+                    'name': f.get('name', ''),
+                    'content': f.get('content', ''),
+                    'language': f.get('language', 'text'),
+                    'path': f.get('path', ''),
+                    'version': f.get('version', '1')
+                } for f in chat_state.files if isinstance(f, dict)]
+            
+            # Se c'è un file specifico nel contesto, usalo
             current_file = context.get('current_file') if context else None
             image_data = None
             
@@ -573,12 +584,12 @@ class ChatInterface:
             # Prepara contesto del messaggio
             message_context = self._prepare_context(
                 prompt,
-                files,
+                files,  # Passa i file formattati
                 current_file,
                 image_data
             )
             
-            # Aggiungi messaggio utente
+            # Aggiungi messaggio utente con contesto files
             user_message = {
                 "role": "user",
                 "content": prompt,
@@ -586,7 +597,7 @@ class ChatInterface:
                 "context": {
                     "content_type": message_context.content_type,
                     "active_rules": list(message_context.active_rules),
-                    "files": message_context.available_files  # Aggiungi i file al contesto del messaggio
+                    "files": files  # Includi i file nel contesto del messaggio
                 }
             }
             
@@ -609,50 +620,29 @@ class ChatInterface:
 
             # Gestisci risposta
             with st.chat_message("assistant"):
-                # Placeholder per il pulsante di stop e il messaggio thinking
-                col1, col2 = st.columns([5,1])
-                with col1:
-                    thinking_placeholder = st.empty()
-                with col2:
-                    stop_button_placeholder = st.empty()
+                # ... resto del codice della funzione ...
 
-                message_placeholder = st.empty()
+                # Prepara contesto per LLM con i file formattati
+                llm_context = {
+                    "content_type": message_context.content_type,
+                    "active_rules": message_context.active_rules,
+                    "conversation_mode": st.session_state.conversation_mode,
+                    "conversation_style": st.session_state.conversation_style,
+                    "conversation_history": self._get_conversation_context(),
+                    "available_files": files,  # Usa i file formattati
+                }
+
+                if current_file:
+                    llm_context["current_file"] = current_file
                 
-                try:
-                    chat_state.is_processing = True
-                    chat_state.current_response = ""
-                    
-                    # Mostra pulsante di stop durante l'elaborazione
-                    if stop_button_placeholder.button("🛑 Stop", key="stop_button"):
-                        chat_state.should_stop = True
-                        thinking_placeholder.error("Elaborazione interrotta")
-                        chat_state.is_processing = False
-                        return
-
-                    # Mostra il messaggio "thinking"
-                    thinking_placeholder.markdown("_🤔 Sto pensando..._")
-                    
-                    # Prepara contesto per LLM con i file formattati
-                    llm_context = {
-                        "content_type": message_context.content_type,
-                        "active_rules": message_context.active_rules,
-                        "conversation_mode": st.session_state.conversation_mode,
-                        "conversation_style": st.session_state.conversation_style,
-                        "conversation_history": self._get_conversation_context(),
-                        "available_files": message_context.available_files,  # File già formattati da _prepare_context
-                    }
-
-                    if message_context.current_file:
-                        llm_context["current_file"] = message_context.current_file
-                    
-                    if message_context.analysis_result:
-                        llm_context["code_analysis"] = message_context.analysis_result
-                    
-                    if message_context.version_changes:
-                        llm_context["version_changes"] = message_context.version_changes
-                    
-                    if message_context.image_data:
-                        llm_context["image"] = message_context.image_data["base64"]
+                if message_context.analysis_result:
+                    llm_context["code_analysis"] = message_context.analysis_result
+                
+                if message_context.version_changes:
+                    llm_context["version_changes"] = message_context.version_changes
+                
+                if image_data:
+                    llm_context["image"] = image_data["base64"]
 
                     # Debug log per verifica contesto
                     st.session_state.debug_logs.append(f"LLM Context Keys: {list(llm_context.keys())}")
