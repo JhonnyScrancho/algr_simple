@@ -1,3 +1,4 @@
+# app.py
 import os
 import sys
 from pathlib import Path
@@ -36,6 +37,10 @@ def initialize_session_state():
         except Exception as e:
             st.error(f"Errore nell'inizializzazione di Firebase: {str(e)}")
             return False
+    
+    # Inizializza debug logs
+    if 'debug_logs' not in st.session_state:
+        st.session_state.debug_logs = []
     
     # Inizializza le chat se non esistono
     if 'chats' not in st.session_state:
