@@ -1,0 +1,364 @@
+/* Layout base */
+.stApp {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sidebar styling */
+.sidebar .block-container {
+    max-width: 100% !important;
+    padding: 0.5rem !important;
+}
+
+.sidebar-content {
+    padding: 0 0.5rem !important;
+}
+
+.sidebar .stForm {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.sidebar .stMarkdown {
+    margin: 0 !important;
+}
+
+/* Interactive elements */
+.stSelectbox:hover,
+.streamlit-expanderHeader:hover {
+    cursor: pointer !important;
+}
+
+/* Tabs styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 30px !important;
+    white-space: pre !important;
+    padding: 0 10px !important;
+}
+
+/* General containers */
+.block-container {
+    padding-top: 0.5rem !important;
+}
+
+.element-container {
+    margin-bottom: 0.3rem !important;
+}
+
+div[data-testid="stVerticalBlock"] > div {
+    padding: 0 !important;
+}
+
+/* Settings & Input styling */
+.settings-container {
+    margin-bottom: 1rem;
+}
+
+.model-selector {
+    margin-bottom: 0.5rem;
+}
+
+.stTextInput > div > div > input {
+    font-size: 0.9rem !important;
+}
+
+/* Chat UI components */
+.chat-container {
+    margin-top: 1rem;
+}
+
+.chat-message {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+[data-testid="stChatMessage"] {
+    background-color: transparent !important;
+}
+
+/* Se vuoi rendere trasparente anche il contenuto del messaggio */
+[data-testid="stChatMessageContent"] {
+    background-color: transparent !important;
+}
+
+/* Se vuoi mantenere un minimo di contrasto, puoi usare un background semi-trasparente */
+[data-testid="stChatMessageContent"] {
+    background-color: rgba(245, 245, 245, 0.5) !important;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Code display */
+.code-block {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f6f8fa;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    margin: 1rem 0;
+}
+
+/* File handling */
+.file-preview {
+    border: 1px solid #e1e4e8;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    margin: 1rem 0;
+}
+
+.file-tree {
+    font-family: monospace;
+    margin-left: 1rem;
+}
+
+/* Chat list styling */
+.chat-list {
+    margin-top: 0.5rem;
+}
+
+.chat-item {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.chat-item:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chat-item.active {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+}
+
+/* Chat metadata */
+.chat-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.chat-metadata {
+    font-size: 0.7rem;
+    color: #6c757d;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+/* Chat actions */
+.chat-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-actions button {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    height: auto !important;
+}
+
+.delete-chat {
+    visibility: hidden;
+    margin-left: auto;
+}
+
+.chat-item:hover .delete-chat {
+    visibility: visible;
+}
+
+/* Image upload styling */
+[data-testid="stFileUploader"] {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 1px dashed #dee2e6;
+    margin-bottom: 0.5rem;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+[data-testid="stImage"] {
+    border-radius: 0.3rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+/* Buttons */
+button[data-testid="baseButton-secondary"] {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+/* Typography */
+h1 {
+    line-height: 2;
+}
+
+/* Regole e azioni contestuali */
+.rules-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: rgba(99, 102, 241, 0.1);
+    color: rgb(99, 102, 241);
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.rules-badge.mandatory {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: rgb(239, 68, 68);
+}
+
+.rules-container {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgba(243, 244, 246, 0.5);
+    border: 1px solid rgba(229, 231, 235, 1);
+}
+
+.rule-group {
+    margin-bottom: 1rem;
+}
+
+.rule-group-title {
+    font-weight: 600;
+    color: rgb(55, 65, 81);
+    margin-bottom: 0.5rem;
+}
+
+.contextual-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: white;
+    border: 1px solid rgba(229, 231, 235, 1);
+    color: rgb(55, 65, 81);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-button:hover {
+    background-color: rgba(243, 244, 246, 1);
+    border-color: rgba(209, 213, 219, 1);
+}
+
+.action-button.primary {
+    background-color: rgb(99, 102, 241);
+    color: white;
+    border: none;
+}
+
+.action-button.primary:hover {
+    background-color: rgb(79, 82, 221);
+}
+
+/* Regole attive nella chat */
+.active-rules-display {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: rgba(243, 244, 246, 0.5);
+    border-radius: 0.375rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+}
+
+.active-rules-display .title {
+    font-weight: 600;
+    color: rgb(55, 65, 81);
+    margin-bottom: 0.5rem;
+}
+
+/* Custom rules editor */
+.custom-rule-form {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+}
+
+.custom-rule-form input,
+.custom-rule-form textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+/* Rule presets */
+.preset-selector {
+    margin-bottom: 1rem;
+}
+
+.preset-card {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(229, 231, 235, 1);
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.preset-card:hover {
+    border-color: rgb(99, 102, 241);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.preset-card.active {
+    background-color: rgba(99, 102, 241, 0.1);
+    border-color: rgb(99, 102, 241);
+}
+
+/* Tooltips per regole */
+.rule-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.rule-tooltip .tooltip-content {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background-color: rgb(55, 65, 81);
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.rule-tooltip:hover .tooltip-content {
+    visibility: visible;
+}
